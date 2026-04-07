@@ -2,12 +2,19 @@ import './App.css'
 import api from '../../services/api';
 import { useEffect, useState, useRef } from 'react';
 
-function App() {
-  const [users, setUsers] = useState([])
+interface User {
+  id: string;
+  name: string;
+  age: string;
+  email: string;
+}
 
-  const inputName = useRef()
-  const inputAge = useRef()
-  const inputEmail = useRef()
+function App() {
+  const [users, setUsers] = useState<User[]>([])
+
+  const inputName = useRef<HTMLInputElement>(null)
+  const inputAge = useRef<HTMLInputElement>(null)
+  const inputEmail = useRef<HTMLInputElement>(null)
 
   async function getUsers() {
     const getUsersApi = await api.get('/user')
@@ -23,7 +30,7 @@ function App() {
     getUsers()
   }
 
-  async function deleteUsers(id) {
+  async function deleteUsers(id: string) {
     await api.delete(`/user/${id}`)
     getUsers()
   }
