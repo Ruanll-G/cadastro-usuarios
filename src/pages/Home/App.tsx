@@ -22,6 +22,7 @@ function App() {
   }
 
   async function createUsers() {
+    if (!inputName.current || !inputAge.current || !inputEmail.current) return;
     await api.post('/user', {
     name: inputName.current.value,
     age: inputAge.current.value,
